@@ -261,7 +261,7 @@ impl TlsConnector {
             }
         }
         supported_protocols(builder.min_protocol, builder.max_protocol, &mut connector)?;
-
+        connector.set_alpn_protos(b"\x02h2").unwrap();
         for cert in &builder.root_certificates {
             connector.cert_store_mut().add_cert((cert.0).0.clone())?;
         }
